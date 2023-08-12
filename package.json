@@ -1,0 +1,15 @@
+{
+  "name": "doctopdfconverterapi",
+  "version": "1.0.0",
+  "description": "Convert DOC & DOCX files to PDF API",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Moinak",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "typescript": "^5.1.6"
+  }
+}
