@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const body_parser_1 = __importDefault(require("body-parser"));
 const express_fileupload_1 = __importDefault(require("express-fileupload"));
-const saveUploadedFile_1 = __importDefault(require("./Services/saveUploadedFile"));
+const FileConversion_1 = __importDefault(require("./Services/FileConversion"));
 const server = (0, express_1.default)();
 const PORT = 9000;
 const jsonParser = body_parser_1.default.json(); // To parse json in req
@@ -20,11 +20,10 @@ server.post("/convert", (req, res) => {
     const file = (_a = req.files) === null || _a === void 0 ? void 0 : _a.file;
     console.log(file);
     if (file) {
-        (0, saveUploadedFile_1.default)(file)
+        FileConversion_1.default
+            .saveUploadedFile(file)
             .then(() => { res.status(200).json({ 'Message': 'File uploaded!' }); })
-            .catch(err => {
-            res.status(500).json({ 'Error': err });
-        });
+            .catch(err => { res.status(500).json({ 'Error': err }); });
     }
     else {
         res.status(400).json({ 'Error': 'No file to upload!' });

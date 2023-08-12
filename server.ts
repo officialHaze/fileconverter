@@ -1,7 +1,7 @@
 import express from "express"
 import bodyParser from "body-parser"
 import fileUpload from "express-fileupload"
-import saveUploadedFile from "./Services/saveUploadedFile"
+import fileConversion from "./Services/FileConversion"
 
 
 const server = express()
@@ -22,11 +22,10 @@ server.post("/convert", (req, res)=>{
     console.log(file)
     if(file)
     {
-        saveUploadedFile(file)
+        fileConversion
+        .saveUploadedFile(file)
         .then(()=>{res.status(200).json({'Message': 'File uploaded!'})})
-        .catch(err=>{
-            res.status(500).json({'Error': err})
-        })
+        .catch(err=>{res.status(500).json({'Error': err})})
     }
     else
     {
