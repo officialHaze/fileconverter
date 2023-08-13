@@ -6,7 +6,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const body_parser_1 = __importDefault(require("body-parser"));
 const express_fileupload_1 = __importDefault(require("express-fileupload"));
-const FileConversion_1 = __importDefault(require("./Services/FileConversion"));
+const FileConverter_1 = __importDefault(require("./Services/FileConverter"));
+const constants_1 = require("./Utils/constants");
+const fs_1 = __importDefault(require("fs"));
 const server = (0, express_1.default)();
 const PORT = 9000;
 const jsonParser = body_parser_1.default.json(); // To parse json in req
@@ -15,17 +17,31 @@ server.use((0, express_fileupload_1.default)());
 server.listen(PORT, "", () => {
     console.log(`Server is running on port ${PORT}`);
 });
-server.post("/convert", (req, res) => {
+server.post("/convert/docToPdf", (req, res) => {
     var _a;
     const file = (_a = req.files) === null || _a === void 0 ? void 0 : _a.file;
     console.log(file);
     if (file) {
-        FileConversion_1.default
-            .saveUploadedFile(file)
-            .then(() => { res.status(200).json({ 'Message': 'File uploaded!' }); })
+        const fileConverter = new FileConverter_1.default(constants_1.PDF, file);
+        fileConverter.fromDocToPdf()
+            .then((outputPath) => {
+            res.download(outputPath, (err) => {
+                if (err) {
+                    console.error(err);
+                }
+                fs_1.default.unlink(outputPath, (err) => {
+                    if (err) {
+                        console.error(err);
+                    }
+                    else {
+                        console.log('File deleted');
+                    }
+                });
+            });
+        })
             .catch(err => { res.status(500).json({ 'Error': err }); });
     }
     else {
-        res.status(400).json({ 'Error': 'No file to upload!' });
+        res.status(400).json({ 'Error': 'No file to convert!' });
     }
 });

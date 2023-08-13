@@ -5,22 +5,34 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const fs_1 = __importDefault(require("fs"));
 const path_1 = __importDefault(require("path"));
+const libreoffice_convert_1 = require("libreoffice-convert");
 class FileConversion {
-    saveUploadedFile(file) {
-        const filename = file.name;
-        const fileContent = file.data;
-        return new Promise((resolve, reject) => {
-            fs_1.default.writeFile(path_1.default.resolve(__dirname, `../Files/${filename}`), fileContent, (err) => {
+    constructor(convertTo, file) {
+        this.convertTo = convertTo;
+        this.fileBuff = file.data;
+    }
+    fromDocToPdf() {
+        const docBuff = this.fileBuff;
+        const outputPath = path_1.default.resolve(__dirname, '../Files/test.pdf');
+        return new Promise((res, rej) => {
+            (0, libreoffice_convert_1.convert)(docBuff, this.convertTo, undefined, (err, data) => {
                 if (err) {
                     console.error(err);
-                    reject("Error while saving the file");
+                    rej('There was a problem converting the file');
                 }
                 else {
-                    resolve();
+                    // Save the converted file
+                    fs_1.default.writeFile(outputPath, data, (err) => {
+                        if (err) {
+                            rej('There was a problem saving the file');
+                        }
+                        else {
+                            res();
+                        }
+                    });
                 }
             });
         });
     }
 }
-const fileConversion = new FileConversion();
-exports.default = fileConversion;
+exports.default = FileConversion;
