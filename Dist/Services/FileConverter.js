@@ -16,7 +16,7 @@ class FileConverter {
     }
     fromDocToPdf() {
         const docBuff = this.fileBuff;
-        const outputPath = path_1.default.resolve(__dirname, `${constants_1.RELATIVE_PATH}/${this.filename}_${Date.now()}.${constants_1.PDF}`);
+        const outputPath = path_1.default.resolve(__dirname, `${constants_1.RELATIVE_PATH}/${this.filename}_${Date.now()}${constants_1.PDF}`);
         return new Promise((res, rej) => {
             if (this.fileformat !== constants_1.DOC) {
                 rej("Format not supported!");

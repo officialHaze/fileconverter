@@ -22,7 +22,7 @@ export default class FileConverter
     fromDocToPdf(): Promise<string>
     {
         const docBuff = this.fileBuff;
-        const outputPath = path.resolve(__dirname, `${RELATIVE_PATH}/${this.filename}_${Date.now()}.${PDF}`)
+        const outputPath = path.resolve(__dirname, `${RELATIVE_PATH}/${this.filename}_${Date.now()}${PDF}`)
         return new Promise((res, rej)=>{
             if(this.fileformat !== DOC)
             {
