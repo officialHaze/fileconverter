@@ -1,7 +1,8 @@
 import express from "express"
 import FileConverter from "../Services/FileConverter"
-import { PDF } from "../Utils/constants"
+import { XLSX } from "../Utils/constants"
 import fs from "fs"
+import { devlogInstance } from "../Utils/loggerConfig"
 
 const router = express.Router()
 
@@ -12,7 +13,7 @@ router.post('/', (req, res)=>{
     {
         const fileConverter = new FileConverter(file)
         fileConverter
-        .fromDocToPdf()
+        .fromPdfToXl()
         .then((outputPath)=>{
             res.download(outputPath, (err)=>{
                 if(err)
@@ -26,7 +27,7 @@ router.post('/', (req, res)=>{
                     }
                     else
                     {
-                        console.log('File deleted')
+                        devlogInstance.log('File deleted')
                     }
                 }) 
             })

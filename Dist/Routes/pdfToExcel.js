@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const FileConverter_1 = __importDefault(require("../Services/FileConverter"));
 const fs_1 = __importDefault(require("fs"));
+const loggerConfig_1 = require("../Utils/loggerConfig");
 const router = express_1.default.Router();
 router.post('/', (req, res) => {
     var _a;
@@ -14,7 +15,7 @@ router.post('/', (req, res) => {
     if (file) {
         const fileConverter = new FileConverter_1.default(file);
         fileConverter
-            .fromDocToPdf()
+            .fromPdfToXl()
             .then((outputPath) => {
             res.download(outputPath, (err) => {
                 if (err) {
@@ -25,7 +26,7 @@ router.post('/', (req, res) => {
                         console.error(err);
                     }
                     else {
-                        console.log('File deleted');
+                        loggerConfig_1.devlogInstance.log('File deleted');
                     }
                 });
             });

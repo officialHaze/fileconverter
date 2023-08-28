@@ -3,10 +3,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+require("dotenv/config");
 const express_1 = __importDefault(require("express"));
 const body_parser_1 = __importDefault(require("body-parser"));
 const express_fileupload_1 = __importDefault(require("express-fileupload"));
 const docToPdf_1 = __importDefault(require("./Routes/docToPdf"));
+const pdfToExcel_1 = __importDefault(require("./Routes/pdfToExcel"));
 const cors_1 = __importDefault(require("cors"));
 const server = (0, express_1.default)();
 const PORT = 9000;
@@ -22,3 +24,4 @@ server.listen(PORT, "", () => {
     console.log(`Server is running on port ${PORT}`);
 });
 server.use("/convert/docToPdf", docToPdf_1.default);
+server.use("/convert/pdfToExcel", pdfToExcel_1.default);

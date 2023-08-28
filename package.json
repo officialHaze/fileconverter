@@ -4,13 +4,17 @@
   "description": "Convert DOC & DOCX files to PDF API",
   "main": "server.js",
   "scripts": {
-    "dev": "nodemon ./Dist/server.js"
+    "build": "tsc",
+    "dev": "nodemon ./Dist/server.js",
+    "docker-dev-up": "docker-compose -f docker-compose.dev.yml up"
   },
   "author": "Moinak",
   "license": "ISC",
   "dependencies": {
+    "@banglarthek/logger": "^1.0.7",
     "body-parser": "^1.20.2",
     "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
     "express": "^4.18.2",
     "express-fileupload": "^1.4.0",
     "libreoffice-convert": "^1.4.1",

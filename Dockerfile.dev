@@ -1,0 +1,23 @@
+FROM ubuntu:22.04
+
+RUN apt-get update && \
+    apt update
+
+RUN apt-get install libreoffice -y
+
+RUN apt-get install nodejs -y && \
+    apt-get install npm -y && \
+    apt-get update && \
+    apt update
+
+WORKDIR /api
+
+COPY package.json .
+
+RUN npm install
+
+COPY ./Dist .
+
+EXPOSE 9000
+
+CMD [ "node", "server.js" ]

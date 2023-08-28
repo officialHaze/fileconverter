@@ -1,0 +1,15 @@
+version: '3.9'
+
+services:
+  api:
+    image: file-converter-api-dev
+    container_name: file-converter-dev
+    build: 
+      context: .
+      dockerfile: Dockerfile.dev
+    env_file:
+      - ./.env
+    environment:
+      - WDS_SOCKET_HOST=127.0.0.1
+    ports:
+      - 9000:9000

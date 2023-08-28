@@ -1,7 +1,9 @@
+import "dotenv/config"
 import express from "express"
 import bodyParser from "body-parser"
 import fileUpload from "express-fileupload"
 import docToPdf from "./Routes/docToPdf"
+import pdfToExcel from "./Routes/pdfToExcel"
 import cors from "cors"
 
 
@@ -24,3 +26,5 @@ server.listen(PORT, "", ()=>{
 })
 
 server.use("/convert/docToPdf", docToPdf)
+
+server.use("/convert/pdfToExcel", pdfToExcel)
