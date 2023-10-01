@@ -20,4 +20,4 @@ COPY ./Dist .
 
 EXPOSE 9000
 
-CMD [ "node", "server.js" ]
+CMD [ "npm", "run", "dev-in-docker" ]

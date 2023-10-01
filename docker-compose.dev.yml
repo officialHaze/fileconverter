@@ -11,5 +11,10 @@ services:
       - ./.env
     environment:
       - WDS_SOCKET_HOST=127.0.0.1
+      - CHOKIDAR_POLLING=true
+      - WATCHPACK_POLLING=true
+    volumes:
+      - ./Dist:/api/Dist
+      - ./node_modules:/api/node_modules
     ports:
       - 9000:9000
