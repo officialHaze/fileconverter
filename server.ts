@@ -3,7 +3,8 @@ import express from "express";
 import bodyParser from "body-parser";
 import fileUpload from "express-fileupload";
 import docToPdf from "./Routes/docToPdf";
-import pdfToExcel from "./Routes/pdfToExcel";
+import pdfToDoc from "./Routes/pdfToDoc";
+// import pdfToExcel from "./Routes/pdfToExcel";
 import cors from "cors";
 
 const server = express();
@@ -25,6 +26,10 @@ server.listen(PORT, "", () => {
   console.log(`Server is running on port ${PORT}`);
 });
 
+// Convert doc to pdf
 server.use("/convert/docToPdf", docToPdf);
+
+// Convert pdf to doc
+server.use("/convert/pdfToDoc", pdfToDoc);
 
 // server.use("/convert/pdfToExcel", pdfToExcel)

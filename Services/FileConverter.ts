@@ -42,6 +42,35 @@ export default class FileConverter {
     });
   }
 
+  fromPdfToDoc(): Promise<string> {
+    const pdfBuff = this.fileBuff;
+    const outputPath = path.resolve(
+      __dirname,
+      `${RELATIVE_PATH}/Doc/${this.filename}_${Date.now()}.${DOC}`
+    );
+    return new Promise((res, rej) => {
+      if (this.fileformat !== PDF) {
+        rej("Format not supported!");
+      } else {
+        convert(pdfBuff, `.${DOC}`, undefined, (err, data) => {
+          if (err) {
+            console.error(err);
+            rej("There was a problem converting the file");
+          } else {
+            // Save the converted file
+            fs.writeFile(outputPath, data, err => {
+              if (err) {
+                rej("There was a problem saving the file");
+              } else {
+                res(outputPath);
+              }
+            });
+          }
+        });
+      }
+    });
+  }
+
   // Prototype
   fromPdfToXl(): Promise<string> {
     const pdfBuff = this.fileBuff;
