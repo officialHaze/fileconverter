@@ -4,8 +4,8 @@ import { convert } from "libreoffice-convert";
 import { DOC, DOCX, PDF, RELATIVE_PATH, XLSX } from "../Utils/constants";
 import { ConvertDocumentDirectRequest, ConvertApi } from "groupdocs-conversion-cloud";
 
-const appId = "11ffe417-f1e3-4c5a-8849-57277352681e";
-const appSecret = "283cafd7f2be88f68f88d41056f50f8b";
+const appId = process.env.CONVERT_APP_ID ? process.env.CONVERT_APP_ID : "";
+const appSecret = process.env.CONVERT_APP_SECRET ? process.env.CONVERT_APP_SECRET : "";
 
 const convertAPI = ConvertApi.fromKeys(appId, appSecret);
 
