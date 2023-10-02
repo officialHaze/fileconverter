@@ -19,7 +19,7 @@ router.post("/", (req, res) => {
           }
           fs.unlink(outputPath, err => {
             if (err) {
-              console.error(err);
+              devlogInstance.error(err);
             } else {
               devlogInstance.log("File deleted");
             }
@@ -27,9 +27,11 @@ router.post("/", (req, res) => {
         });
       })
       .catch(err => {
+        devlogInstance.error(err);
         res.status(500).json({ Error: err });
       });
   } else {
+    devlogInstance.error("No file uploaded!");
     res.status(400).json({ Error: "No file to convert!" });
   }
 });

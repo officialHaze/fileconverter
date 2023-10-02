@@ -14,7 +14,7 @@ services:
       - CHOKIDAR_POLLING=true
       - WATCHPACK_POLLING=true
     volumes:
-      - ./Dist:/api/Dist
+      - ./Dist/*:/api/Dist/*
       - ./node_modules:/api/node_modules
     ports:
       - 9000:9000

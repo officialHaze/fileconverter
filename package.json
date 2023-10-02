@@ -13,7 +13,7 @@
   "author": "Moinak",
   "license": "ISC",
   "dependencies": {
-    "@banglarthek/logger": "^1.0.9",
+    "@banglarthek/logger": "^1.0.11",
     "body-parser": "^1.20.2",
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",
